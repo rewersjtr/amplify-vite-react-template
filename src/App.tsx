@@ -4,7 +4,7 @@ import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 
 const client = generateClient<Schema>();
-
+  const { user, signOut } = useAuthenticator();
 function App() {
   const { signOut } = useAuthenticator();
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
@@ -31,6 +31,7 @@ function App() {
       < onClick={() => deleteTodo(todo.id)} li key={todo.id} >{todo.content}</li>
         ))}
       </ul>
+          <h1>{user?.signInDetails?.loginId}'s todos</h1>
               <button onClick={signOut}>Sign out</button>
     </main>
   );
